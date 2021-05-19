@@ -19,14 +19,15 @@ class App extends React.Component {
     );
   }
   render() {
-    return (
-      <div className="">
-        Latitude: {this.state.lat}
-        <br />
-        Error: {this.state.errorMessage}
-        <SeasonDisplay />
-      </div>
-    );
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div className="">Error: {this.state.errorMessage}</div>;
+    }
+
+    if (!this.state.errorMessage && this.state.lat) {
+      return <div className="">Latitude: {this.state.lat}</div>;
+    }
+
+    return <div className="">Loading</div>;
   }
 }
 ReactDOM.render(<App />, document.querySelector("#root"));
